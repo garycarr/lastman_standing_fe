@@ -12,17 +12,8 @@ process.on('exit', function (code) {
     console.log(chalk.red('Stopping ' + target + ' on ' + port + '; exiting with code: ' + code));
 });
 
-// // make sure we're trying to serve something we know about :)
-// if (target === 'docs') {
-//     root = 'docs/';
-//     port = process.env.PORT_DOCS;
-// } else if (target === 'coverage') {
 root = 'reports/coverage/html/';
 port = process.env.PORT_COVERAGE;
-// } else {
-//     console.log(chalk.red(target + ' doesn\'t exist'));
-//     process.exit();
-// }
 
 // create our server
 var server = httpServer.createServer({

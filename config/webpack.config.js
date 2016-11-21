@@ -12,9 +12,9 @@ module.exports = {
     entry: path.join(context, '/app/javascript/index.js'),
 
     output: {
-      path: path.join(context, '/dist/'),
-      filename: 'bundle.js',
-      publicPath: '/'
+        path: path.join(context, '/dist/'),
+        filename: 'bundle.js',
+        publicPath: '/'
     },
 
     devtool: "sourcemap",

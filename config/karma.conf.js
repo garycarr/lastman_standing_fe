@@ -10,10 +10,10 @@ module.exports = function (config) {
         // list of files / patterns to load in the browser
         files: [
             {
-                pattern: '**/tests/**/*.spec.js',
-                watched: false,
-                included: true,
-                served: true
+                pattern: '**/tests/**/*.spec.js'
+                // watched: false,
+                // included: true,
+                // served: true
             }
         ],
         // list of files to exclude
@@ -23,7 +23,8 @@ module.exports = function (config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            '**/tests/**/*.spec.js': ['webpack', 'sourcemap']
+            // '**/tests/**/*.spec.js': ['webpack', 'sourcemap']
+            '**/tests/**/*.spec.js': ['webpack']
             // 'app/javascript/**/*.js': ['coverage', 'webpack']
         },
 
@@ -36,14 +37,7 @@ module.exports = function (config) {
             ]
         },
 
-        junitReporter: {
-            outputDir: 'reports/test',
-            outputFile: 'test-results.xml',
-            suite: '',
-            useBrowserName: false
-        },
-
-        reporters: ['spec', 'coverage', 'junit'],
+        reporters: ['spec', 'coverage'],
 
         logLevel: config.LOG_WARN,
 
@@ -51,7 +45,6 @@ module.exports = function (config) {
             'karma-coverage',
             'karma-jquery',
             'karma-jasmine',
-            'karma-junit-reporter',
             'karma-phantomjs-launcher',
             'karma-phantomjs-shim',
             'karma-spec-reporter',
