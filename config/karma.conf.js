@@ -1,6 +1,5 @@
 module.exports = function (config) {
     config.set({
-
         // base path that will be used to resolve all patterns (eg. files, exclude)
         basePath: '../',
 
@@ -11,8 +10,10 @@ module.exports = function (config) {
         // list of files / patterns to load in the browser
         files: [
             {
-                // pattern: './app/javascript/tests/views/header.spec.js'
-                pattern: '**/tests/**/*.spec.js'
+                pattern: '**/tests/**/*.spec.js',
+                watched: false,
+                included: true,
+                served: true
             }
         ],
         // list of files to exclude
@@ -22,50 +23,39 @@ module.exports = function (config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            '**/tests/**/*.spec.js': ['webpack']
+            '**/tests/**/*.spec.js': ['webpack', 'sourcemap']
+            // 'app/javascript/**/*.js': ['coverage', 'webpack']
         },
 
-        // coverageReporter: {
-        //     dir: 'reports/coverage',
-        //     reporters: [
-        //         { type: 'html', subdir: 'html' },
-        //         { type: 'text', subdir: '.', file: 'coverage.txt' },
-        //         { type: 'cobertura', subdir: '.', file: 'coverage.xml' }
-        //     ]
-        // },
-        //
-        // junitReporter: {
-        //     outputDir: 'reports/test',
-        //     outputFile: 'test-results.xml',
-        //     suite: '',
-        //     useBrowserName: false
-        // },
+        coverageReporter: {
+            dir: 'reports/coverage',
+            reporters: [
+                { type: 'html', subdir: 'html' },
+                { type: 'text', subdir: '.', file: 'coverage.txt' },
+                { type: 'cobertura', subdir: '.', file: 'coverage.xml' }
+            ]
+        },
 
-        // test results reporter to use
-        // possible values: 'dots', 'progress'
-        // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        // reporters: ['spec', 'coverage', 'junit'],
+        junitReporter: {
+            outputDir: 'reports/test',
+            outputFile: 'test-results.xml',
+            suite: '',
+            useBrowserName: false
+        },
 
-        // web server port
-        // port: 9003,
+        reporters: ['spec', 'coverage', 'junit'],
 
-        // enable / disable colors in the output (reporters and logs)
-        // colors: true,
-
-        // level of logging
-        // possible values:
-        // config.LOG_DISABLE ||
-        // config.LOG_ERROR ||
-        // config.LOG_WARN ||
-        // config.LOG_INFO ||
-        // config.LOG_DEBUG
         logLevel: config.LOG_WARN,
 
         plugins: [
+            'karma-coverage',
             'karma-jquery',
             'karma-jasmine',
+            'karma-junit-reporter',
             'karma-phantomjs-launcher',
             'karma-phantomjs-shim',
+            'karma-spec-reporter',
+            'karma-sourcemap-loader',
             'karma-webpack'
         ],
 

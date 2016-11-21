@@ -1,5 +1,5 @@
-import HeaderView from '../../views/header';
-import { HEADER } from '../../common/strings';
+import HeaderView from '../../javascript/views/header';
+import { HEADER } from '../../javascript/common/strings';
 
 describe('Backbone view test', function () {
     it('Should be found', function () {

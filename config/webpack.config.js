@@ -1,11 +1,24 @@
-let dirName = __dirname;  // eslint-disable-line
+/* eslint-disable */
+let dirName = __dirname;
+let path = require('path');
+require('dotenv').config();
+
+let context = path.join(__dirname, '..');
 
 module.exports = {
-    entry: './app/javascript/index.js',
+
+    context: context,
+
+    entry: path.join(context, '/app/javascript/index.js'),
+
     output: {
-        path: dirName,
-        filename: 'bundle.js'
+      path: path.join(context, '/dist/'),
+      filename: 'bundle.js',
+      publicPath: '/'
     },
+
+    devtool: "sourcemap",
+
     module: {
         preLoaders: [
             // Preloader to check the files before babel-loader has transformed them
@@ -36,12 +49,18 @@ module.exports = {
                 //     helperDirs: [`${dirName}/src/helpers`]
                 // }
             }
-            // To test
-            // {
-            //     test: /\.js$/,
-            //     loader: 'eslint-loader',
-            //     exclude: /node_modules/
-            // }
         ]
+    },
+
+    devServer: {
+        // historyApiFallback: true,
+        port: process.env.PORT_APP,
+        inline: true,
+        proxy: {
+            // '/api/*': process.env.API_PROXY_PROTOCOL +
+            //             process.env.API_PROXY_HOST +
+            //             (process.env.API_PROXY_PORT ? ':' + process.env.API_PROXY_PORT : '') +
+            //             process.env.API_PROXY_PATH,
+        }
     }
 };
