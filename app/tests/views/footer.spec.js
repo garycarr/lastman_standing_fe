@@ -1,7 +1,7 @@
-import FooterView from '../../views/footer';
-import { FOOTER } from '../../common/strings';
+import FooterView from '../../javascript/views/footer';
+import { FOOTER } from '../../javascript/common/strings';
 
-describe('Backbone view test', function () {
+describe('Footer view test', function () {
     it('Should be found', function () {
         let footerView = new FooterView();
         footerView.render();
