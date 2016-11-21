@@ -1,0 +1,46 @@
+{
+  "name": "lastman_standing_fe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --config config/webpack.config.js --progress --colors -d",
+    "test": "karma start config/karma.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garycarr/lastman_standing_fe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/garycarr/lastman_standing_fe/issues"
+  },
+  "homepage": "https://github.com/garycarr/lastman_standing_fe#readme",
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.8",
+    "babel-preset-es2015": "^6.18.0",
+    "backbone": "^1.3.3",
+    "backbone.marionette": "^3.1.0",
+    "css-loader": "^0.26.0",
+    "eslint": "^3.10.2",
+    "eslint-loader": "^1.6.1",
+    "handlebars": "^4.0.6",
+    "handlebars-loader": "^1.4.0",
+    "jasmine-core": "^2.5.2",
+    "jquery": "^3.1.1",
+    "karma": "^1.3.0",
+    "karma-eslint": "^2.1.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-jquery": "^0.1.0",
+    "karma-phantomjs-launcher": "^1.0.2",
+    "karma-phantomjs-shim": "^1.4.0",
+    "karma-webpack": "^1.8.0",
+    "style-loader": "^0.13.1",
+    "underscore": "^1.8.3",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
+  }
+}
