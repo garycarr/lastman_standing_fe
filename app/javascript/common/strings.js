@@ -10,6 +10,6 @@ export const LOGIN = {
     USERNAME: 'Username',
     PASSWORD: 'Password',
     SUBMIT: 'Submit',
-    PASSWORD_MISSING: 'Please enter password',
-    USERNAME_MISSING: 'Please enter username'
+    PASSWORD_MISSING: 'Please enter correct length password',
+    USERNAME_MISSING: 'Please enter correct length username'
 };

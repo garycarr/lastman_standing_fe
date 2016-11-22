@@ -1,5 +1,7 @@
 import LoginView from '../../javascript/views/login';
 import { LOGIN } from '../../javascript/common/strings';
+import { USER } from '../../javascript/common/constants';
+import Commmon from '../common';
 import $ from 'jquery';
 
 describe('Login view test', function () {
@@ -8,7 +10,6 @@ describe('Login view test', function () {
         this.server = sinon.fakeServer.create({
             useFakeServer: true
         });
-        // this.server.autoRespond = true;
     });
 
     afterEach(function () {
@@ -19,8 +20,8 @@ describe('Login view test', function () {
         let loginView = new LoginView();
         loginView.render();
         expect(loginView.el.tagName.toLowerCase()).toBe('div');
-        expect(loginView.$el.find('label[for=username]').text()).toBe(LOGIN.USERNAME);
-        expect(loginView.$el.find('label[for=password]').text()).toBe(LOGIN.PASSWORD);
+        expect(loginView.$el.find('label[data-label-username]').text()).toBe(LOGIN.USERNAME);
+        expect(loginView.$el.find('label[data-label-password]').text()).toBe(LOGIN.PASSWORD);
     });
 
     it('should fail validation for login', function () {
@@ -28,10 +29,26 @@ describe('Login view test', function () {
         loginView.render();
         let spyPostLogin = sinon.spy(loginView, 'postLogin');
 
-        loginView.$el.find('#username').val('John');
-        loginView.$el.find('#password').val('a'); // Password too short
+        // Initially the error messages should be hidden
+        expect(loginView.$el.find('label[data-error-username]').attr('hidden')).toBe('hidden');
+        expect(loginView.$el.find('label[data-error-password]').attr('hidden')).toBe('hidden');
+
+        loginView.$el.find('#username').val(Commmon.generateString(USER.USERNAME_MIN));
+        loginView.$el.find('#password').val(Commmon.generateString(USER.PASSWORD_MIN - 1)); // Password too short
         loginView.$el.find('#login-submit').click();
+
+        expect(loginView.$el.find('label[data-error-password]').attr('hidden')).toBe(undefined);
+        expect(loginView.$el.find('label[data-error-username]').attr('hidden')).toBe('hidden');
         expect(spyPostLogin.calledOnce).toBe(false);
+
+        loginView.$el.find('#username').val(Commmon.generateString(USER.USERNAME_MIN - 1)); // username too short
+        loginView.$el.find('#password').val(Commmon.generateString(USER.PASSWORD_MIN));
+        loginView.$el.find('#login-submit').click();
+        expect(loginView.$el.find('label[data-error-username]').attr('hidden')).toBe(undefined);
+
+        expect(loginView.$el.find('label[data-error-password]').attr('hidden')).toBe('hidden');
+        expect(spyPostLogin.calledOnce).toBe(false);
+
     });
 
     it('should pass validation for login and make a request', function () {
@@ -55,11 +72,11 @@ describe('Login view test', function () {
     it('Save new model to server', function () {
         let id = '12b',
             loginView = new LoginView(),
+            lowerCaseUsername = 'john',
             password = 'abcdef',
-            upperCaseUsername = 'John',
-            lowerCaseUsername = 'john';
+            upperCaseUsername = 'John';
 
-        this.server.respondWith('POST', 'api/book/',
+        this.server.respondWith('POST', 'api/user/',
             [200, { 'Content-Type': 'application/json' },
                 `{ "id": "${id}" }`]);
 
