@@ -30,10 +30,10 @@ export const REGISTER_STRINGS = {
     PASSWORD: 'Password',
     SUBMIT: 'Submit',
     USERNAME: 'Username',
-    URL: 'api/login/',
+    URL: 'api/users/',
     REGISTER_ERROR: 'The registration failed',
     PASSWORD_MISSING: 'Please enter correct length password',
     USERNAME_MISSING: 'Please enter correct length username',
-    FULL_NAME: 'Full name',
-    FULL_NAME_MISSING: 'Please enter correct length full name'
+    FULLNAME: 'Full name',
+    FULLNAME_MISSING: 'Please enter correct length full name'
 };

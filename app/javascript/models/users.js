@@ -17,14 +17,15 @@ export default Model.extend({
     url: function () {
         return loginRegisterMixin.url(REGISTER_STRINGS.URL, this.id);
     },
+    idAttribute: '_id',
     validate: function (attrs) {
         let errors = [];
         let validateResponse = loginRegisterMixin.validate(attrs);
         if (validateResponse !== false) {
             errors = validateResponse;
         }
-        if (attrs.fullName.length < USER_CONSTANTS.FULL_NAME_MIN || attrs.fullName.length > USER_CONSTANTS.FULL_NAME_MAX) {
-            errors.push({ name: 'full-name', message: REGISTER_STRINGS.NAME_MISSING });
+        if (attrs.fullname.length < USER_CONSTANTS.FULLNAME_MIN || attrs.fullname.length > USER_CONSTANTS.FULLNAME_MAX) {
+            errors.push({ name: 'fullname', message: REGISTER_STRINGS.NAME_MISSING });
         }
         return errors.length > 0 ? errors : false;
 

@@ -15,12 +15,12 @@ export default mn.View.extend({
         return {
             dataTagPrefix: REGISTER_STRINGS.DATA_TAG_PREFIX,
             id: REGISTER_STRINGS.ID,
-            fullName: REGISTER_STRINGS.FULL_NAME,
+            fullname: REGISTER_STRINGS.FULLNAME,
             username: REGISTER_STRINGS.USERNAME,
             password: REGISTER_STRINGS.PASSWORD,
             submit: REGISTER_STRINGS.SUBMIT,
             missingUsername: REGISTER_STRINGS.USERNAME_MISSING,
-            missingFullName: REGISTER_STRINGS.FULL_NAME_MISSING,
+            missingFullname: REGISTER_STRINGS.FULLNAME_MISSING,
             missingPassword: REGISTER_STRINGS.PASSWORD_MISSING,
             submitError: REGISTER_STRINGS.REGISTER_ERROR,
             register: 1
@@ -35,7 +35,7 @@ export default mn.View.extend({
         ev.preventDefault();
         let user = new userModel({
             password: this.$el.find('#register-password').val(),
-            fullName: this.$el.find('#register-full-name').val(),
+            fullname: this.$el.find('#register-fullname').val(),
             username: this.$el.find('#register-username').val()
         });
         // The wrong way to validate and clear messages

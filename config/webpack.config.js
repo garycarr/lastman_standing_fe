@@ -58,10 +58,10 @@ module.exports = {
         port: process.env.PORT_APP,
         inline: true,
         proxy: {
-            // '/api/*': process.env.API_PROXY_PROTOCOL +
-            //             process.env.API_PROXY_HOST +
-            //             (process.env.API_PROXY_PORT ? ':' + process.env.API_PROXY_PORT : '') +
-            //             process.env.API_PROXY_PATH,
+            '/api/*': process.env.API_PROXY_PROTOCOL +
+                        process.env.API_PROXY_HOST +
+                        (process.env.API_PROXY_PORT ? ':' + process.env.API_PROXY_PORT : '') +
+                        process.env.API_PROXY_PATH,
         }
     }
 };

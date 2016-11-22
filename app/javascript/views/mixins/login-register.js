@@ -9,7 +9,6 @@ export default {
     },
     showErrorMessages: function (el, dataPrefix, validationErrors) {
         validationErrors.forEach(function (error) {
-            debugger;
             el.find(`label[${dataPrefix}-error-${error.name}]`).removeAttr('hidden');
         });
     }
