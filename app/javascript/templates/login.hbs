@@ -1,11 +1,13 @@
 <form id="login">
   <label data-label-username for="username">{{loginUsername}}</label>
   <input id="username" type="text" value="" />
-  <label data-error-username for="error-username" hidden>{{missingUsername}}</label>
+  <label data-error-username hidden>{{missingUsername}}</label>
   </br>
   <label data-label-password for="password">{{loginPassword}}</label>
   <input id="password" type="text" value="" />
-  <label data-error-password for="error-password" hidden>{{missingPassword}}</label>
+  <label data-error-password hidden>{{missingPassword}}</label>
   </br>
-  <input id="login-submit" type="submit" value="{{loginSubmit}}" /br>
+  <input id="login-submit" type="submit" value="{{loginSubmit}}"
+  </br>
+  <label data-error-login hidden>{{loginError}}</label>
 </form>

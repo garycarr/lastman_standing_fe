@@ -45,7 +45,6 @@ describe('Login view test', function () {
         loginView.$el.find('#password').val(Commmon.generateString(USER.PASSWORD_MIN));
         loginView.$el.find('#login-submit').click();
         expect(loginView.$el.find('label[data-error-username]').attr('hidden')).toBe(undefined);
-
         expect(loginView.$el.find('label[data-error-password]').attr('hidden')).toBe('hidden');
         expect(spyPostLogin.calledOnce).toBe(false);
 
@@ -69,7 +68,7 @@ describe('Login view test', function () {
         sinon.assert.calledWith(stub, { username:username, password:password });
     });
 
-    it('Save new model to server', function () {
+    it('should successfully login', function () {
         let id = '12b',
             loginView = new LoginView(),
             lowerCaseUsername = 'john',
@@ -83,7 +82,7 @@ describe('Login view test', function () {
         loginView.render();
 
         let ajaxSpy = sinon.spy($, 'ajax');
-        loginView.postLogin({ username: upperCaseUsername, password: password });
+        loginView.postLogin({ username: upperCaseUsername, password: password }, false);
 
         expect(ajaxSpy.calledOnce).toBe(true);
         expect(ajaxSpy.getCall(0).args[0].type).toBe('POST');
@@ -93,5 +92,30 @@ describe('Login view test', function () {
         let data = JSON.parse(ajaxSpy.getCall(0).args[0].data);
         expect(data.username).toBe(lowerCaseUsername);
         expect(data.password).toBe(password);
+        ajaxSpy.restore();
+        // TODO - actions after login
+    });
+
+    it('should fail to login', function () {
+        let loginView = new LoginView(),
+            password = 'wrong pass',
+            username = 'john';
+
+        this.server.respondWith('POST', LOGIN.URL,
+            [404, { 'Content-Type': 'application/json' },
+                '']);
+
+        loginView.render();
+        expect(loginView.$el.find('label[data-error-login]').attr('hidden')).toBe('hidden');
+        let ajaxSpy = sinon.spy($, 'ajax');
+
+        loginView.postLogin({ username: username, password: password }, false);
+
+        expect(ajaxSpy.calledOnce).toBe(true);
+
+        // Check login fail actions
+        expect(loginView.$el.find('label[data-error-login]').attr('hidden')).toBe(undefined);
+
+        ajaxSpy.restore();
     });
 });

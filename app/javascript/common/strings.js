@@ -7,10 +7,11 @@ export const FOOTER = {
 };
 
 export const LOGIN = {
-    USERNAME: 'Username',
+    LOGIN_ERROR: 'The username or password was incorrect',
     PASSWORD: 'Password',
-    SUBMIT: 'Submit',
     PASSWORD_MISSING: 'Please enter correct length password',
-    USERNAME_MISSING: 'Please enter correct length username',
-    URL: 'api/login/'
+    SUBMIT: 'Submit',
+    URL: 'api/login/',
+    USERNAME: 'Username',
+    USERNAME_MISSING: 'Please enter correct length username'
 };

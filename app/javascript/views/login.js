@@ -13,6 +13,7 @@ export default mn.View.extend({
 
     templateContext: function () {
         return {
+            loginError: LOGIN.LOGIN_ERROR,
             loginUsername: LOGIN.USERNAME,
             loginPassword: LOGIN.PASSWORD,
             loginSubmit: LOGIN.SUBMIT,
@@ -49,14 +50,21 @@ export default mn.View.extend({
         }
     },
 
-    postLogin: function (attr) {
+    postLogin: function (attr, asyncBool) {
+        let that = this;
+        // Use a promise?
+        if (asyncBool === undefined) {
+            asyncBool = true;
+        }
+
         let user = new userModel(attr);
         user.save({ attr }, {
-            success: function (model, response) {
-                console.log(response); // eslint-disable-line no-console
+            async: asyncBool,
+            success: function () {
+                that.$el.find('label[data-error-login]').attr('hidden', true);
             },
-            error: function (model, response) {
-                console.log(response); // eslint-disable-line no-console
+            error: function () {
+                that.$el.find('label[data-error-login]').removeAttr('hidden');
             }
         });
     }
