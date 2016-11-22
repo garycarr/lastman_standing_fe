@@ -14,7 +14,7 @@ export default Model.extend({
         password: ''
     },
     url: function () {
-        let url = 'api/user/';
+        let url = LOGIN.URL;
         if (this.id) {
             url += this.id;
         }

@@ -1,5 +1,6 @@
 import Users from '../../javascript/models/users';
 import { USER } from '../../javascript/common/constants';
+import { LOGIN } from '../../javascript/common/strings';
 import Commmon from '../common';
 
 describe('Users model test', function () {
@@ -45,9 +46,9 @@ describe('Users model test', function () {
     it('should test url', function () {
         let id = 'abc123',
             user = new Users();
-        expect(user.url()).toBe('api/user/');
+        expect(user.url()).toBe(LOGIN.URL);
         user.set('id', id);
-        expect(user.url()).toBe(`api/user/${id}`);
+        expect(user.url()).toBe(`${LOGIN.URL}${id}`);
     });
 
 });

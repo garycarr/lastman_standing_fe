@@ -76,7 +76,7 @@ describe('Login view test', function () {
             password = 'abcdef',
             upperCaseUsername = 'John';
 
-        this.server.respondWith('POST', 'api/user/',
+        this.server.respondWith('POST', LOGIN.URL,
             [200, { 'Content-Type': 'application/json' },
                 `{ "id": "${id}" }`]);
 
@@ -89,7 +89,7 @@ describe('Login view test', function () {
         expect(ajaxSpy.getCall(0).args[0].type).toBe('POST');
         expect(ajaxSpy.getCall(0).args[0].contentType).toBe('application/json');
         expect(ajaxSpy.getCall(0).args[0].dataType).toBe('json');
-        expect(ajaxSpy.getCall(0).args[0].url).toBe('api/user/');
+        expect(ajaxSpy.getCall(0).args[0].url).toBe(LOGIN.URL);
         let data = JSON.parse(ajaxSpy.getCall(0).args[0].data);
         expect(data.username).toBe(lowerCaseUsername);
         expect(data.password).toBe(password);
