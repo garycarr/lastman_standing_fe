@@ -1,8 +1,9 @@
 'use strict';
 
 import { Model } from 'backbone';
-import { USER } from '../common/constants';
-import { LOGIN } from '../common/strings';
+import loginRegisterMixin from './mixins/login-register';
+import { USER_CONSTANTS } from '../common/constants';
+import { REGISTER_STRINGS } from '../common/strings';
 
 /**
  * Model for add context member
@@ -14,27 +15,22 @@ export default Model.extend({
         password: ''
     },
     url: function () {
-        let url = LOGIN.URL;
-        if (this.id) {
-            url += this.id;
-        }
-        return url;
+        return loginRegisterMixin.url(REGISTER_STRINGS.URL, this.id);
     },
     validate: function (attrs) {
         let errors = [];
-
-        if (attrs.username.length < USER.USERNAME_MIN || attrs.username.length > USER.USERNAME_MAX) {
-            errors.push({ name: 'username', message: LOGIN.USERNAME_MISSING });
+        let validateResponse = loginRegisterMixin.validate(attrs);
+        if (validateResponse !== false) {
+            errors = validateResponse;
         }
-        if (attrs.password.length < USER.PASSWORD_MIN || attrs.password.length > USER.PASSWORD_MAX) {
-            errors.push({ name: 'password', message: LOGIN.PASSWORD_MISSING });
+        if (attrs.fullName.length < USER_CONSTANTS.FULL_NAME_MIN || attrs.fullName.length > USER_CONSTANTS.FULL_NAME_MAX) {
+            errors.push({ name: 'full-name', message: REGISTER_STRINGS.NAME_MISSING });
         }
         return errors.length > 0 ? errors : false;
+
     },
     // Probably a better way to do this, leaving in as a demo of how to override
     save: function (attrs, options) {
-        this.set('username', this.get('username').toLowerCase());
-        attrs.attr.username = attrs.attr.username.toLowerCase();
-        Model.prototype.save.call(this, attrs, options);
+        loginRegisterMixin.save(attrs, options, this);
     }
 });

@@ -1,9 +1,9 @@
 import mn from 'backbone.marionette';
-import userModel from '../models/users';
-import template from '../templates/login.hbs';
-import $ from 'jquery';
+import loginModel from '../models/login';
+import template from '../templates/partials/login-register.hbs';
+import loginRegisterMixin from './mixins/login-register';
 
-import { LOGIN } from '../common/strings';
+import { LOGIN_STRINGS } from '../common/strings';
 
 
 export default mn.View.extend({
@@ -13,12 +13,14 @@ export default mn.View.extend({
 
     templateContext: function () {
         return {
-            loginError: LOGIN.LOGIN_ERROR,
-            loginUsername: LOGIN.USERNAME,
-            loginPassword: LOGIN.PASSWORD,
-            loginSubmit: LOGIN.SUBMIT,
-            missingUsername: LOGIN.USERNAME_MISSING,
-            missingPassword: LOGIN.PASSWORD_MISSING
+            id: LOGIN_STRINGS.ID,
+            dataTagPrefix: LOGIN_STRINGS.DATA_TAG_PREFIX,
+            submitError: LOGIN_STRINGS.LOGIN_ERROR,
+            username: LOGIN_STRINGS.USERNAME,
+            password: LOGIN_STRINGS.PASSWORD,
+            submit: LOGIN_STRINGS.SUBMIT,
+            missingUsername: LOGIN_STRINGS.USERNAME_MISSING,
+            missingPassword: LOGIN_STRINGS.PASSWORD_MISSING
         };
     },
 
@@ -28,26 +30,23 @@ export default mn.View.extend({
 
     login: function (ev) {
         ev.preventDefault();
-        let that = this;
-        let user = new userModel({
-            password: this.$el.find('#password').val(),
-            username: this.$el.find('#username').val()
+
+        let user = new loginModel({
+            password: this.$el.find('#login-password').val(),
+            username: this.$el.find('#login-username').val()
         });
         // The wrong way to validate and clear messages
         let validationErrors = user.validate(user.attributes);
 
         // Remove any previous error messages
-        $.each(user.attributes, function (attr) {
-            that.$el.find(`label[data-error-${attr}]`).attr('hidden', true);
-        });
+        loginRegisterMixin.removeErrorMessages(this.$el, LOGIN_STRINGS.DATA_TAG_PREFIX, user.attributes);
 
         if (validationErrors) {
-            validationErrors.forEach(function (error) {
-                that.$el.find(`label[data-error-${error.name}]`).removeAttr('hidden');
-            });
-        } else {
-            this.postLogin(user.attributes);
+            loginRegisterMixin.showErrorMessages(this.$el, LOGIN_STRINGS.DATA_TAG_PREFIX, validationErrors);
+            return;
         }
+
+        this.postLogin(user.attributes);
     },
 
     postLogin: function (attr, asyncBool) {
@@ -57,17 +56,14 @@ export default mn.View.extend({
             asyncBool = true;
         }
 
-        let user = new userModel(attr);
+        let user = new loginModel(attr);
         user.save({ attr }, {
             async: asyncBool,
             success: function () {
-                that.$el.find('label[data-error-login]').attr('hidden', true);
             },
             error: function () {
-                that.$el.find('label[data-error-login]').removeAttr('hidden');
+                that.$el.find(`label[${LOGIN_STRINGS.DATA_TAG_PREFIX}-error]`).removeAttr('hidden');
             }
         });
     }
-
-
 });

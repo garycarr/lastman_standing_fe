@@ -11,6 +11,7 @@ module.exports = {
 
     entry: path.join(context, '/app/javascript/index.js'),
 
+    // TODO - get rid of the url path
     output: {
         path: path.join(context, '/dist/'),
         filename: 'bundle.js',
