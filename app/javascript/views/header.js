@@ -1,6 +1,6 @@
 import mn from 'backbone.marionette';
 import template from '../templates/header.hbs';
-import { HEADER } from '../common/strings';
+import { HEADER_STRINGS } from '../common/strings';
 
 export default mn.View.extend({
     tagName: 'div',
@@ -8,7 +8,7 @@ export default mn.View.extend({
 
     templateContext: function () {
         return {
-            title: HEADER.TITLE
+            title: HEADER_STRINGS.TITLE
         };
     }
 });
