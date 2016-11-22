@@ -1,6 +1,6 @@
 import mn from 'backbone.marionette';
 import template from '../templates/layout.hbs';
-import contentView from './content';
+import loginView from './login';
 import headerView from './header';
 import footerView from './footer';
 
@@ -10,13 +10,13 @@ export default mn.View.extend({
     template,
     regions: {
         header: '#header',
-        content: '#content',
+        login: '#login',
         footer: '#footer'
     },
 
     onRender: function () {
         this.showChildView('header', new headerView());
-        this.showChildView('content', new contentView());
+        this.showChildView('login', new loginView());
         this.showChildView('footer', new footerView());
     }
 });

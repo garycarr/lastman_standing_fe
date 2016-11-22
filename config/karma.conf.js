@@ -5,7 +5,7 @@ module.exports = function (config) {
 
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: ['jasmine'],
+        frameworks: ['jasmine', 'sinon'],
 
         // list of files / patterns to load in the browser
         files: [
@@ -24,7 +24,7 @@ module.exports = function (config) {
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
             // '**/tests/**/*.spec.js': ['webpack', 'sourcemap']
-            '**/tests/**/*.spec.js': ['webpack']
+            '**/tests/**/*.spec.js': ['webpack', 'sourcemap']
             // 'app/javascript/**/*.js': ['coverage', 'webpack']
         },
 
@@ -48,6 +48,7 @@ module.exports = function (config) {
             'karma-phantomjs-launcher',
             'karma-phantomjs-shim',
             'karma-spec-reporter',
+            'karma-sinon',
             'karma-sourcemap-loader',
             'karma-webpack'
         ],
