@@ -13,6 +13,7 @@ export default mn.View.extend({
 
     templateContext: function () {
         return {
+            cancelMessage: REGISTER_STRINGS.CANCEL_MESSAGE,
             dataTagPrefix: REGISTER_STRINGS.DATA_TAG_PREFIX,
             id: REGISTER_STRINGS.ID,
             fullname: REGISTER_STRINGS.FULLNAME,

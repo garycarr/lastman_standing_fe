@@ -17,3 +17,8 @@
   </br>
   <label {{dataTagPrefix}}-error hidden>{{submitError}}</label>
 </form>
+{{#if registerRoute}}
+  <a {{dataTagPrefix}}-register-route href="webpack-dev-server/bundle#{{registerRoute}}">{{registerMessage}}</a>
+{{else}}
+  <a {{dataTagPrefix}}-login-route href="webpack-dev-server/bundle#{{loginRoute}}">{{cancelMessage}}</a>
+{{/if}}

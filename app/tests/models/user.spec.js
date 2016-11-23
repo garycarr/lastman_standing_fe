@@ -1,23 +1,28 @@
-import Login from '../../javascript/models/login';
+import Users from '../../javascript/models/users';
 import { USER_CONSTANTS } from '../../javascript/common/constants';
-import { LOGIN_STRINGS } from '../../javascript/common/strings';
+import { USER_STRINGS } from '../../javascript/common/strings';
 import Commmon from '../common';
 
-describe('Login model test', function () {
+describe('Users model test', function () {
 
-    it('Create login model and validate input', function () {
-        let user = new Login();
+    it('Create user model and validate input', function () {
+        let user = new Users();
         expect(user.get('username')).toBe('');
         expect(user.get('password')).toBe('');
+        expect(user.get('fullname')).toBe('');
 
         expect(user.isValid(true)).toBe(false);
-
         user.set('username', Commmon.generateString(USER_CONSTANTS.USERNAME_MIN));
+
         // Still false without a password
         expect(user.isValid(true)).toBe(false);
-
         user.set('password', Commmon.generateString(USER_CONSTANTS.PASSWORD_MIN));
-        // Now okay
+
+        // Now false with invalid full name
+        expect(user.isValid(true)).toBe(false);
+        user.set('fullname', Commmon.generateString(USER_CONSTANTS.FULLNAME_MIN));
+
+        // Now Okay
         expect(user.isValid(true)).toBe(true);
 
         // Test boundaries
@@ -38,17 +43,27 @@ describe('Login model test', function () {
         user.set('password', Commmon.generateString(USER_CONSTANTS.PASSWORD_MAX + 1));
         expect(user.isValid(true)).toBe(false);
 
+        // Full name
+        // Password
+        user.set('fullname', Commmon.generateString(USER_CONSTANTS.FULLNAME_MIN - 1));
+        expect(user.isValid(true)).toBe(false);
+
+        user.set('fullname', Commmon.generateString(USER_CONSTANTS.FULLNAME_MAX + 1));
+        expect(user.isValid(true)).toBe(false);
+
         // Okay again
-        user.set('password', Commmon.generateString(USER_CONSTANTS.PASSWORD_MAX));
+        user.set('username', Commmon.generateString(USER_CONSTANTS.USERNAME_MIN));
+        user.set('password', Commmon.generateString(USER_CONSTANTS.PASSWORD_MIN));
+        user.set('fullname', Commmon.generateString(USER_CONSTANTS.FULLNAME_MIN));
         expect(user.isValid(true)).toBe(true);
     });
 
     it('should test url', function () {
         let id = 'abc123',
-            user = new Login();
-        expect(user.url()).toBe(LOGIN_STRINGS.URL);
+            user = new Users();
+        expect(user.url()).toBe(USER_STRINGS.URL);
         user.set('id', id);
-        expect(user.url()).toBe(`${LOGIN_STRINGS.URL}${id}`);
+        expect(`${user.url()}${id}`).toBe(`${USER_STRINGS.URL}${id}`);
     });
 
 });
