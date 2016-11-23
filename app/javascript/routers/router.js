@@ -10,6 +10,8 @@ export default Mn.AppRouter.extend({
      * @type {Object}
      */
     appRoutes: {
-        '': 'login'
+        '': 'login',
+        register: 'register',
+        homepage: 'homepage'
     }
 });

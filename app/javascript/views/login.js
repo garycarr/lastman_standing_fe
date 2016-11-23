@@ -2,9 +2,12 @@ import mn from 'backbone.marionette';
 import loginModel from '../models/login';
 import template from '../templates/partials/login-register.hbs';
 import loginRegisterMixin from './mixins/login-register';
+import Radio from 'backbone.radio';
+// import Backbone from 'backbone';
 
 import { LOGIN_STRINGS } from '../common/strings';
 
+const channel = Radio.channel('application');
 
 export default mn.View.extend({
     tagName: 'div',
@@ -20,7 +23,9 @@ export default mn.View.extend({
             password: LOGIN_STRINGS.PASSWORD,
             submit: LOGIN_STRINGS.SUBMIT,
             missingUsername: LOGIN_STRINGS.USERNAME_MISSING,
-            missingPassword: LOGIN_STRINGS.PASSWORD_MISSING
+            missingPassword: LOGIN_STRINGS.PASSWORD_MISSING,
+            registerMessage: LOGIN_STRINGS.REGISTER_MESSAGE,
+            registerRoute: LOGIN_STRINGS.REGISTER_ROUTE
         };
     },
 
@@ -60,6 +65,9 @@ export default mn.View.extend({
         user.save({ attr }, {
             async: asyncBool,
             success: function () {
+                // debugger;
+                // Backbone.history.navigate('homepage'); // TODO - why does FE app have this?
+                channel.trigger('nav:homepage');
             },
             error: function () {
                 that.$el.find(`label[${LOGIN_STRINGS.DATA_TAG_PREFIX}-error]`).removeAttr('hidden');

@@ -1,12 +1,12 @@
-import Login from '../../javascript/models/login';
+import Users from '../../javascript/models/login';
 import { USER_CONSTANTS } from '../../javascript/common/constants';
 import { LOGIN_STRINGS } from '../../javascript/common/strings';
 import Commmon from '../common';
 
-describe('Login model test', function () {
+describe('Users model test', function () {
 
     it('Create login model and validate input', function () {
-        let user = new Login();
+        let user = new Users();
         expect(user.get('username')).toBe('');
         expect(user.get('password')).toBe('');
 
@@ -45,7 +45,7 @@ describe('Login model test', function () {
 
     it('should test url', function () {
         let id = 'abc123',
-            user = new Login();
+            user = new Users();
         expect(user.url()).toBe(LOGIN_STRINGS.URL);
         user.set('id', id);
         expect(user.url()).toBe(`${LOGIN_STRINGS.URL}${id}`);

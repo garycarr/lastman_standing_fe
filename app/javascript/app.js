@@ -1,4 +1,5 @@
 import Marionette from 'backbone.marionette';
+import Backbone from 'backbone';
 import LayoutView     from './views/layout.js';
 import AppRouter     from './routers/router';
 import AppController from './controllers/controller';
@@ -11,7 +12,8 @@ export default Marionette.Application.extend({
     onStart () {
         this.layoutView = new LayoutView();
         this.layoutView.render();
-        this.appRouter = this.createAppRouter(this.appLayout);
+        this.appRouter = this.createAppRouter(this.layoutView);
+        Backbone.history.start();
     },
     /**
      * Given the root view will create the app controller (which requires the

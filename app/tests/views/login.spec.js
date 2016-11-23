@@ -23,6 +23,7 @@ describe('Login view test', function () {
         expect(loginView.$el.find(`label[${LOGIN_STRINGS.DATA_TAG_PREFIX}-username]`).text()).toBe(LOGIN_STRINGS.USERNAME);
         expect(loginView.$el.find(`#${LOGIN_STRINGS.ID}-password`).attr('type')).toBe('password');
         expect(loginView.$el.find(`label[${LOGIN_STRINGS.DATA_TAG_PREFIX}-password]`).text()).toBe(LOGIN_STRINGS.PASSWORD);
+        expect(loginView.$el.find(`a[${LOGIN_STRINGS.DATA_TAG_PREFIX}-register-route]`).text()).toBe(LOGIN_STRINGS.REGISTER_MESSAGE);
     });
 
     it('should fail validation for login', function () {

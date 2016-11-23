@@ -1,5 +1,7 @@
 import Marionette from 'backbone.marionette';
 import Radio      from 'backbone.radio';
+import RegisterView from '../views/register';
+import LoginView from '../views/login';
 
 /**
  * This controller implements the route methods.
@@ -12,14 +14,22 @@ export default Marionette.Object.extend({
      */
     initialize (options) {
         this.layout = options.layout;
-
         const channel = Radio.channel('application');
-
+        channel.on('nav:register', this.register.bind(this));
         channel.on('nav:login', this.login.bind(this));
+        channel.on('nav:homepage', this.homepage.bind(this));
     },
 
     login () {
-        console.log('LOGIN ROUTE');
-        // this.layout.showChildView('body', new LoginView());
+        this.layout.showChildView('content', new LoginView());
+    },
+
+    register () {
+        this.layout.showChildView('content', new RegisterView());
+    },
+
+    homepage () {
+        console.log('YOUVE GOT TO THE HOMEPAGE');
+        // this.layout.showChildView('content', new RegisterView());
     }
 });

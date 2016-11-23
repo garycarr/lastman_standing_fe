@@ -12,7 +12,9 @@ export const LOGIN_STRINGS = {
     LOGIN_ERROR: 'The username or password was incorrect',
     PASSWORD: 'Password',
     PASSWORD_MISSING: 'Please enter correct length password',
-    SUBMIT: 'Submit',
+    SUBMIT: 'Login',
+    REGISTER_ROUTE: '#register',
+    REGISTER_MESSAGE: 'Click here to register',
     URL: 'api/login/',
     USERNAME: 'Username',
     USERNAME_MISSING: 'Please enter correct length username'
@@ -24,11 +26,12 @@ export const USER_STRINGS = {
 };
 
 export const REGISTER_STRINGS = {
+    CANCEL_MESSAGE: 'Cancel registration',
     DATA_TAG_PREFIX: 'data-register',
     ID: 'register',
     NAME: 'Name',
     PASSWORD: 'Password',
-    SUBMIT: 'Submit',
+    SUBMIT: 'Register',
     USERNAME: 'Username',
     URL: 'api/users/',
     REGISTER_ERROR: 'The registration failed',

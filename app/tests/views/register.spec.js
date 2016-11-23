@@ -22,6 +22,7 @@ describe('Register view test', function () {
         expect(registerView.el.tagName.toLowerCase()).toBe('div');
         expect(registerView.$el.find(`label[${REGISTER_STRINGS.DATA_TAG_PREFIX}-username]`).text()).toBe(REGISTER_STRINGS.USERNAME);
         expect(registerView.$el.find(`label[${REGISTER_STRINGS.DATA_TAG_PREFIX}-password]`).text()).toBe(REGISTER_STRINGS.PASSWORD);
+        expect(registerView.$el.find(`a[${REGISTER_STRINGS.DATA_TAG_PREFIX}-login-route]`).text()).toBe(REGISTER_STRINGS.CANCEL_MESSAGE);
     });
 
     it('should fail validation for register', function () {
