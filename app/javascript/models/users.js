@@ -12,7 +12,8 @@ import { REGISTER_STRINGS } from '../common/strings';
 export default Model.extend({
     defaults: {
         username: '',
-        password: ''
+        password: '',
+        fullname: ''
     },
     url: function () {
         return loginRegisterMixin.url(REGISTER_STRINGS.URL, this.id);

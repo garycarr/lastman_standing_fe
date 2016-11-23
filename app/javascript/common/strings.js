@@ -22,7 +22,8 @@ export const LOGIN_STRINGS = {
 
 export const USER_STRINGS = {
     DATA_TAG_PREFIX: 'data-user',
-    ID: 'user'
+    ID: 'user',
+    URL: 'api/users/'
 };
 
 export const REGISTER_STRINGS = {
